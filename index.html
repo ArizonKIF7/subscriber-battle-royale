@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscriber Battle Royale</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        #gameCanvas { border: 1px solid black; display: block; margin: 20px auto; }
+        #leaderboard { text-align: center; margin-top: 20px; }
+        #winnerScreen { display: none; text-align: center; }
+        #controls { text-align: center; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Subscriber Battle Royale</h1>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <div id="leaderboard">
+        <h2>Leaderboard</h2>
+        <ul id="scoreList"></ul>
+    </div>
+    <div id="winnerScreen">
+        <h2>Winner!</h2>
+        <p id="winnerName"></p>
+    </div>
+    <div id="controls">
+        <h2>Controls</h2>
+        <p>Use Arrow keys to move, Space to jump, and Enter to start!</p>
+    </div>
+    <script>
+        // JavaScript for game logic
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let scoreList = document.getElementById('scoreList');
+        let winnerScreen = document.getElementById('winnerScreen');
+        let winnerName = document.getElementById('winnerName');
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Game drawing logic here
+        }
+
+        function updateLeaderboard(scores) {
+            scoreList.innerHTML = '';
+            scores.forEach(score => {
+                let li = document.createElement('li');
+                li.textContent = score;
+                scoreList.appendChild(li);
+            });
+        }
+
+        function showWinner(name) {
+            winnerName.textContent = name;
+            winnerScreen.style.display = 'block';
+        }
+
+        // Game loop
+        function gameLoop() {
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        gameLoop();
+    </script>
+</body>
+</html>
